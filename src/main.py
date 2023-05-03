@@ -4,7 +4,7 @@ from pprint import pprint
 from typing import Union
 from fastapi import FastAPI, HTTPException
 
-def get_nutritional_information(bar_code: str):
+def get_product_data(bar_code: str):
     try:
         FINAL_URL  = f'https://br.openfoodfacts.org/produto/{bar_code}'
         page = requests.get(FINAL_URL).text
@@ -50,11 +50,11 @@ def read_root():
 @app.get("/product/{bar_code}")
 def find_product(bar_code: str):
 
-    data = get_nutritional_information(bar_code)
+    data = get_product_data(bar_code)
 
     if data is not None:
         return data
     
     raise HTTPException(status_code=404, detail="Produto não encontrado")
 
-#data = get_nutritional_information(bar_code='7891000061190')
+#data = get_product_data(bar_code='7891000061190')
