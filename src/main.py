@@ -11,6 +11,7 @@ def get_nutritional_information(bar_code: str):
 
         soup = BeautifulSoup(page, "html.parser")
 
+        product_image = soup.find(id="og_image").attrs['src']
         product_name = soup.find("title").text
         table = soup.find(id="panel_nutrition_facts_table_content")
         header = []
@@ -23,8 +24,9 @@ def get_nutritional_information(bar_code: str):
                 rows.append([td.text.strip() for td in row.find_all('td')])
 
         data = {}
-    
-        data["Nome do produto"] = product_name
+
+        data["Nome"] = product_name
+        data["Imagem"] = product_image
         data["Informações nutricionais"] = {}
 
         text_for_ignore = "Fruits‚ vegetables‚ nuts and rapeseed‚ walnut and olive oils (estimate from ingredients list analysis)"
