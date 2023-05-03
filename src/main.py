@@ -19,9 +19,9 @@ def get_product_data(bar_code: str):
 
         for i, row in enumerate(table.find_all('tr')):
             if i == 0:
-                header = [td.text.strip() for td in row.find_all('th')]
+                header = [th.text.strip() for th in row.find_all('th')] #table header
             else:
-                rows.append([td.text.strip() for td in row.find_all('td')])
+                rows.append([td.text.strip() for td in row.find_all('td')]) #table data
 
         data = {}
 
@@ -58,3 +58,4 @@ def find_product(bar_code: str):
     raise HTTPException(status_code=404, detail="Produto não encontrado")
 
 #data = get_product_data(bar_code='7891000061190')
+#run: uvicorn main:app --reload
