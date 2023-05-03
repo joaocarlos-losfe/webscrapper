@@ -27,13 +27,14 @@ def get_product_data(bar_code: str):
 
         data["Nome"] = product_name
         data["Imagem"] = product_image
-        data["Informações nutricionais"] = {}
+        data["Cabeçalho"] = header
+        data["Informações nutricionais"] = []
 
         text_for_ignore = "Fruits‚ vegetables‚ nuts and rapeseed‚ walnut and olive oils (estimate from ingredients list analysis)"
       
         for row in rows:  
             if row[0] != text_for_ignore: 
-                data["Informações nutricionais"][row[0]] = { "quantidade": row[1], "%VD(*)": row[2] }
+                data["Informações nutricionais"].append(row)
 
         return data          
 
